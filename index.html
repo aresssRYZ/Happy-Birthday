@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Surat Ulang Tahun Untuk Kamu 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", system-ui, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #ffe5f5, #ffb6d9, #ff99cc);
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    .hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 18px;
+      opacity: 0.7;
+      animation: floatUp 8s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) translateX(0) scale(0.8); opacity: 0; }
+      10% { opacity: 0.9; }
+      100% { transform: translateY(-10vh) translateX(-20px) scale(1.2); opacity: 0; }
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 24px;
+      padding: 24px 20px 28px;
+      width: min(420px, 92vw);
+      box-shadow: 0 18px 40px rgba(255, 105, 180, 0.35);
+      text-align: center;
+      border: 2px solid #ffc0dd;
+      backdrop-filter: blur(6px);
+    }
+
+    .tagline {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #ff4f9a;
+      font-weight: 600;
+    }
+
+    .title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #ff2e88;
+      margin-top: 4px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: #ff7db3;
+      margin-top: 6px;
+    }
+
+    .cute-line {
+      width: 70%;
+      height: 2px;
+      border-radius: 999px;
+      margin: 14px auto 8px;
+      background: linear-gradient(90deg, #ff99cc, #ff5aa5, #ffd1e8);
+    }
+
+    .name-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: #ffe0f1;
+      color: #ff2e88;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #ffe6f4, #ff79b0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      margin: 0 auto 10px;
+      box-shadow: 0 10px 20px rgba(255, 105, 180, 0.35);
+      border: 3px solid #ffe9f7;
+    }
+
+    .button-wrap {
+      margin-top: 10px;
+      margin-bottom: 6px;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      padding: 10px 22px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      background: linear-gradient(135deg, #ff66b3, #ff2e88);
+      color: white;
+      box-shadow: 0 8px 18px rgba(255, 0, 128, 0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: 0.15s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    .hint {
+      font-size: 11px;
+      color: #ff8fbf;
+      margin-bottom: 10px;
+    }
+
+    /* ======================================
+       BUBBLE CHAT + SCROLL (VERSI FIX)
+       ====================================== */
+    .message-box {
+      margin-top: 12px;
+      border-radius: 18px;
+      background: #fde6f0;
+      border: 2px dashed #ffb1d9;
+      padding: 16px;
+      text-align: left;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #ff2e88;
+
+      /* SCROLL DI DALAM */
+      max-height: 210px;
+      overflow-y: auto;
+      overflow-x: hidden;
+
+      /* tetap animasi buka */
+      transition: max-height 0.6s ease;
+
+      position: relative;
+      display: none;  /* hidden sebelum dibuka */
+    }
+
+    /* scrollbar cute */
+    .message-box::-webkit-scrollbar {
+      width: 6px;
+    }
+    .message-box::-webkit-scrollbar-track {
+      background: #ffe2f2;
+      border-radius: 10px;
+    }
+    .message-box::-webkit-scrollbar-thumb {
+      background: #ff8abf;
+      border-radius: 10px;
+    }
+
+    /* ANIMASI TIAP BARIS */
+    .message-line {
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      margin-bottom: 10px;
+    }
+
+    .message-line.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .footer {
+      margin-top: 10px;
+      font-size: 11px;
+      color: #ff8fbf;
+    }
+
+    .footer span {
+      font-weight: 600;
+      color: #ff2e88;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="hearts" id="hearts-container"></div>
+
+  <div class="card">
+    <div class="tagline">Happy Birthday</div>
+    <div class="title">Surat Kecil Untuk Kamu</div>
+    <div class="subtitle">disponsori oleh rasa sayang & kelucuan berlebihan 💗</div>
+
+    <div class="cute-line"></div>
+
+    <div class="name-pill">
+      💘 Untuk: <strong id="girl-name">Ciaaa</strong>
+    </div>
+
+    <div class="avatar">🐰</div>
+
+    <div class="button-wrap">
+      <button class="btn" id="open-letter-btn">💌 Buka Surat Ulang Tahun</button>
+    </div>
+
+    <div class="hint">klik pelan-pelan aja... suratnya agak malu-malu 💕</div>
+
+    <!-- BUBBLE CHAT -->
+    <div class="message-box" id="message-box">
+
+      <p class="message-line">Hai kamu, manusia lucu yang lagi ulang tahun hari ini. 🎂</p>
+      <p class="message-line">Selamat ulang tahun ya, semoga semua hal manis di dunia ini ngantri buat datang ke hidup kamu.</p>
+      <p class="message-line">Terima kasih sudah lahir dan jadi sosok yang bikin hari-hari aku jadi jauh lebih lucu dan berwarna.</p>
+      <p class="message-line">Kalau hari ini ada yang ngucapin kamu “semoga bahagia”, aku mau nambahin: “dan semoga aku boleh ikut di dalam bahagia itu”.</p>
+      <p class="message-line">Maaf kalau aku belum sesempurna itu, tapi aku janji bakal terus berusaha jadi orang yang bikin kamu ngerasa aman dan disayang.</p>
+      <p class="message-line">Pokoknya hari ini milik kamu. Ketawa yang banyak, makan yang enak, dan jangan lupa kalau ada satu orang di sini yang sayang sama kamu segitu banyaknya. 💗</p>
+      <p class="message-line">Happy birthday, cantik. I’m so proud of you, and I’m so lucky to have you. ✨</p>
+
+    </div>
+
+    <div class="footer">
+      Dari seseorang yang diam-diam <span>berdoa yang terbaik</span> buat kamu setiap hari. 💞
+    </div>
+  </div>
+
+  <script>
+    // NAMA
+    const namaCewek = "Nama Cewek";
+    document.getElementById("girl-name").textContent = namaCewek;
+
+    // HEARTS ANIMATION
+    const heartsContainer = document.getElementById("hearts-container");
+    const heartIcons = ["💗","💖","💘","💕","💝"];
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.textContent = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 6 + Math.random() * 4 + "s";
+      heart.style.fontSize = 14 + Math.random() * 12 + "px";
+      heartsContainer.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 10000);
+    }
+    setInterval(createHeart, 600);
+
+    // LOGIKA BUKA SURAT
+    const openBtn = document.getElementById("open-letter-btn");
+    const messageBox = document.getElementById("message-box");
+    const lines = document.querySelectorAll(".message-line");
+    let isOpen = false;
+
+    function showLines() {
+      lines.forEach(l => l.classList.remove("show"));
+      let i = 0;
+      function next() {
+        if (i < lines.length) {
+          lines[i].classList.add("show");
+          i++;
+          setTimeout(next, 350);
+        }
+      }
+      next();
+    }
+
+    openBtn.addEventListener("click", () => {
+      isOpen = !isOpen;
+
+      if (isOpen) {
+        messageBox.style.display = "block";
+        showLines();
+        openBtn.innerHTML = "✨ Tutup Surat";
+      } else {
+        messageBox.style.display = "none";
+        lines.forEach(l => l.classList.remove("show"));
+        openBtn.innerHTML = "💌 Buka Surat Ulang Tahun";
+      }
+    });
+  </script>
+
+</body>
+</html>
